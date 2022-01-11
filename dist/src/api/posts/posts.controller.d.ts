@@ -1,0 +1,31 @@
+import { Observable } from 'rxjs';
+import { DecodedTokenPayload } from '../auth/strategies/jwt.strategy';
+import { AddCommentOnPostRequestDto } from './dto/request/add-comment.db-query';
+import { CreatePostRequestDto } from './dto/request/create-post.request-dto';
+import { ListAllPostsQueryDto } from './dto/request/list-all-posts.query-dto';
+import { UpdateCommentOnPostRequestDto } from './dto/request/update-comment.request-dto';
+import { UpdateLikeForCommentOnPostParam } from './dto/request/update-like-for-comment.param-dto';
+import { UpdateLikeForPostParam } from './dto/request/update-like-for-post.param-dto';
+import { UploadAttachmentImageRequestDto } from './dto/request/upload-attachment-image.request-dto';
+import { UploadAttachmentImageResponseDto } from './dto/response/upload-attachment-image.response-dto';
+import { PostsService } from './posts.service';
+export declare class PostsController {
+    private readonly postsService;
+    constructor(postsService: PostsService);
+    create(user: DecodedTokenPayload, createPostDto: CreatePostRequestDto): Observable<any>;
+    findAllPosts(user: DecodedTokenPayload, query: ListAllPostsQueryDto): Observable<any[]>;
+    findPostsOfAUser(user: DecodedTokenPayload, query: ListAllPostsQueryDto, userId?: number): Observable<any[]>;
+    UpdatePost(user: DecodedTokenPayload, createPostDto: CreatePostRequestDto, postId: number): Observable<any>;
+    remove(user: DecodedTokenPayload, postId: number): Observable<any>;
+    UpdatePostLike(user: DecodedTokenPayload, param: UpdateLikeForPostParam): Observable<any[]>;
+    GetLikeDetailsOfPost(user: DecodedTokenPayload, query: ListAllPostsQueryDto, postId: number): Observable<any[]>;
+    GetPreSignedUrlForAttachment(user: DecodedTokenPayload, body: UploadAttachmentImageRequestDto): Observable<UploadAttachmentImageResponseDto>;
+    AddCommentOnPost(user: DecodedTokenPayload, postId: number, body: AddCommentOnPostRequestDto): Observable<any>;
+    ListCommentOfAPost(user: DecodedTokenPayload, query: ListAllPostsQueryDto, postId: number): Observable<any[]>;
+    ListRepliesOfCommentOfAPost(user: DecodedTokenPayload, query: ListAllPostsQueryDto, postId: number, commentId: number): Observable<any[]>;
+    UpdateCommentOnPost(user: DecodedTokenPayload, createPostDto: UpdateCommentOnPostRequestDto, postId: number, commentId: number): Observable<any>;
+    RemoveCommentOnPost(user: DecodedTokenPayload, postId: number, commentId: number): Observable<any>;
+    UpdateLikeForCommentOnPost(user: DecodedTokenPayload, param: UpdateLikeForCommentOnPostParam): Observable<any[]>;
+    GetLikesForCommentOnPost(user: DecodedTokenPayload, query: ListAllPostsQueryDto, postId: number, commentId: number): Observable<any[]>;
+    ListAllPostsWithTaggedTypes(user: DecodedTokenPayload, query: ListAllPostsQueryDto, type: string, value: string): Observable<any[]>;
+}

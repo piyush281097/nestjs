@@ -1,0 +1,31 @@
+import configuration from 'src/config/configuration';
+import { DatabaseService } from 'src/database/database.service';
+import { Logger } from 'src/shared/logger/logging.service';
+import { S3Service } from 'src/shared/s3/s3.service';
+import { ConfigType } from '@nestjs/config';
+import { ListAllPostsQueryDto } from '../posts/dto/request/list-all-posts.query-dto';
+import { AddCommentOnTradeRequestDto } from './dto/request/add-comment.db-query';
+import { CreateTradeRequestDto } from './dto/request/create-trade.request-dto';
+import { ListAllTradesQueryDto } from './dto/request/list-all-trades.query-dto';
+import { UpdateCommentOnTradeRequestDto } from './dto/request/update-comment.request-dto';
+import { UpdateTradeRequestDto } from './dto/request/update-trade.request-dto';
+export declare class TradesService {
+    private config;
+    private db;
+    private S3;
+    private logger;
+    constructor(config: ConfigType<typeof configuration>, db: DatabaseService<any>, S3: S3Service, logger: Logger);
+    create(userId: number, trade: CreateTradeRequestDto): import("rxjs").Observable<any[]>;
+    findAll(loggedInUserId: number, userId: number, queryParams: ListAllTradesQueryDto): import("rxjs").Observable<any[]>;
+    updateTrade(userId: number, tradeId: number, updateTrade: UpdateTradeRequestDto): import("rxjs").Observable<any>;
+    deleteTrade(userId: number, tradeId: number): import("rxjs").Observable<any>;
+    updateLikeForTrade(userId: number, tradeId: number, isDeleted: string): import("rxjs").Observable<any[]>;
+    getTradeLikeUsers(tradeId: number, queryParams: ListAllTradesQueryDto): import("rxjs").Observable<any[]>;
+    addCommentOnTrade(userId: number, tradeId: number, tradeComment: AddCommentOnTradeRequestDto): import("rxjs").Observable<any>;
+    listCommentOfTrade(tradeId: number, userId: number, query: ListAllTradesQueryDto, commentId?: number, getReplies?: boolean): import("rxjs").Observable<any[]>;
+    updateCommentOnTrade(userId: number, commentId: number, tradeId: number, updateTradeComment: UpdateCommentOnTradeRequestDto): import("rxjs").Observable<any>;
+    deleteCommentOnTrade(userId: number, tradeId: number, commentId: number): import("rxjs").Observable<any>;
+    updateLikeForCommentOnTrade(userId: number, tradeId: number, commentId: number, isDeleted: string): import("rxjs").Observable<any[]>;
+    getLikeForCommentOnTrade(commentId: number, queryParams: ListAllTradesQueryDto): import("rxjs").Observable<any[]>;
+    getPostsWhichTagged(queryParams: ListAllPostsQueryDto, userId: number, value: string): import("rxjs").Observable<any[]>;
+}

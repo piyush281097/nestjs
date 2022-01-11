@@ -1,0 +1,1 @@
+export declare const verifyUserOtpAndAccountDbQuery = "\nWITH update_otp as (\n    UPDATE\n        otp_log\n    SET\n        is_verified = TRUE\n    WHERE\n        id = $1)\nUPDATE\n    user_core\nSET\n    is_verified = TRUE,\n    is_active = TRUE\nWHERE\n    id = $2\n";

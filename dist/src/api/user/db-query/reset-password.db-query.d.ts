@@ -1,0 +1,1 @@
+export declare const resetPasswordDbQuery = "\nWITH update_password AS (\n    UPDATE\n        user_core\n    SET\n        PASSWORD = $1,\n        password_salt = $2\n    WHERE\n        id = $3)\nUPDATE\n    otp_log\nSET\n    is_verified = TRUE\nWHERE\n    id = $4\n";

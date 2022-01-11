@@ -1,0 +1,1 @@
+export declare const getOtpByEmailDbQuery = "\nSELECT\n    ol.id AS otp_id,\n    user_id,\n    otp AS otp_hash\nFROM\n    otp_log ol\n    INNER JOIN user_core uc ON uc.id = ol.user_id\n        AND uc.email = $1\n        AND ol.is_verified = FALSE\nORDER BY ol.last_updated DESC\nLIMIT 1;\n";
